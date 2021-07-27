@@ -5,6 +5,7 @@ from app.error_handler import InvalidExchangeData
 from ..service.exchange_service import exchange_info, make_transaction
 
 api = ExchangeDto.api
+
 @api.route("/getFeeAndRate")
 class ExchangeRate(Resource):
     fee_and_rate_request_fields = api.model('fee_and_rate_request', {
@@ -18,6 +19,7 @@ class ExchangeRate(Resource):
         'fee_amount': fields.Float,
     })
 
+    #Normally this should be a GET method but because of the challenge restraints for all the enpoints to receive and return JSON data it was implemented as a POST method
     @api.doc('Get exchange rate and fee amount')
     @api.expect(fee_and_rate_request_fields)
     @api.response(201, 'Success processing the request', fee_and_rate_response_fields)
