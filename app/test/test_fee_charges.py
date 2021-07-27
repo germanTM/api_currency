@@ -29,7 +29,7 @@ class FeeChargeTestCase(unittest.TestCase):
             if currency_credits < exchange_amount:
                 break
             fee_sum += round(base_amount * exchange_amount * 0.01, 4)
-            info = {"from":from_currency, 'to':to_currency, 'exchange_amount':exchange_amount}
+            info = {"from_currency":from_currency, 'to_currency':to_currency, 'exchange_amount':exchange_amount}
             response = self.app.post('/exchange/transaction', json=info)
             service_fee_sum += round(response.json['fee_amount'], 4)
         self.assertEqual(fee_sum, service_fee_sum)

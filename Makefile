@@ -1,19 +1,26 @@
-clean:
-   find . -type f -name '*.pyc' -delete
-   find . -type f -name '*.log' -delete
+clean:##clean project temp data
+	find . -type f -name '*.pyc' -delete
+	find . -type f -name '*.log' -delete
 
-system-packages:
-   sudo apt install python-pip -y
+install:##install dependencies requirements
+	pip3 install -r requirements.txt
 
-python-packages:
-   pip install -r requirements.txt
+tests:##start tests
+	python3 -m unittest
 
-install: system-packages python-packages
+run:## run the docker container
+	@docker-compose run --service-ports --rm apicurrency || true
 
-tests:
-   python manage.py test
+stop: ## stop Docker containers without removing them
+	@docker-compose stop
 
-run:
-   python manage.py run
+rebuild: ## rebuild base Docker images
+	@docker-compose down --remove-orphans
+	@docker-compose build --no-cache
+	
 
-all: clean install tests run
+all:##first initialization of the project
+	make clean
+	make install 
+	make tests 
+	make run
