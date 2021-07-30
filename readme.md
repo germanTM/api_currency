@@ -33,6 +33,15 @@ To deploy the project, you should enter to any debugger tool available on your e
 The port changes each time the project is deployed this way so to run the services the URL should be localhost/{{port}}
 If the deployment worked correctly, it is going to redirect you to your browser, directly to the swagger file with the documentation.
 
+If having issues using debug tool to run the container, then follow the next steps:
+Build the docker image
+$make build
+
+Finally run the docker image
+$make run
+
+If succedeed it should be accessible from the URL: http://localhost:7000/
+
 _______________
 REST API
 

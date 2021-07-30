@@ -16,6 +16,6 @@ RUN python -m pip install -r requirements.txt
 WORKDIR /app
 COPY . /app
 
-
+RUN export FLASK_APP=manage.py
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["gunicorn", "manage:app", "--bind 0.0.0.0:8001", "--multiprocess", "-m", "flask", "run", "-h", "0.0.0.0", "-p", "5000"]    # listening on 127.0.0.1:8000
+CMD ["python", "manage.py"] #Listening on port 7000

@@ -9,18 +9,14 @@ tests:##start tests
 	python3 -m unittest
 
 run:## run the docker container
-	@docker-compose run --service-ports --rm apicurrency || true
+	docker run --publish 7000:5000 apicurrency
 
-stop: ## stop Docker containers without removing them
-	@docker-compose stop
-
-rebuild: ## rebuild base Docker images
-	@docker-compose down --remove-orphans
-	@docker-compose build --no-cache
-	
+build:
+	docker build -t apicurrency .
 
 all:##first initialization of the project
 	make clean
-	make install 
+	make install
+	make build
 	make tests 
 	make run
